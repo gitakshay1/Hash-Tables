@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hash_Tables
 {
+    
     internal class MyMapNode<K, V>
     {
         private readonly int size;
@@ -45,7 +46,7 @@ namespace Hash_Tables
         }
         public V Get(K key)
         {
-            int position = GetArrayPosition(key);
+             int position = GetArrayPosition(key);
             LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
             foreach (KeyValue<K, V> item in linkedList)
             {
@@ -110,28 +111,39 @@ namespace Hash_Tables
 
         }
 
-        public void GetFreq()
+        public void frequencyOfWords(K key)
+#pragma warning restore IDE1006 // Naming Styles
         {
-            MyMapNode<string, int> myMapNode = new MyMapNode<string, int>(6);
-            string[] words = { "to", "be", "or", "not", "to", "be" };
-            int count = 1;
-            foreach (string i in words)
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
+            KeyValue<K, V> foundItem = default(KeyValue<K, V>);
+            foreach (KeyValue<K, V> item in linkedList)
             {
-                count = myMapNode.CheckHash(i);
-                if (count > 1)
+                if (item.Key.Equals(key))
                 {
-                    myMapNode.Add(i, count);
+                    foundItem = item;
+                    string str = foundItem.Value.ToString();
+                    Console.WriteLine("found data = " + str);
+                    string[] arr = str.Split(',');
+                    Dictionary<string, int> dict = new Dictionary<string, int>();
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        if (dict.ContainsKey(arr[i]))
+                        {
+                            dict[arr[i]] = dict[arr[i]] + 1;
+                        }
+                        else
+                        {
+                            dict.Add(arr[i], 1);
+                        }
+                    }
+                    foreach (KeyValuePair<String, int> entry in dict)
+                    {
+                        Console.WriteLine(entry.Key + " - " +
+                                          entry.Value);
+                        Console.ReadLine();
+                    }
                 }
-                else
-                {
-                    myMapNode.Add(i, 1);
-                }
-            }
-
-            IEnumerable<string> uniqueItems = words.Distinct<string>();
-            foreach (var i in uniqueItems)
-            {
-                myMapNode.Display(i);
             }
         }
 
