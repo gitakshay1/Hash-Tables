@@ -8,7 +8,7 @@
             MyMapNode<string, string> hash = new MyMapNode<string, string>(5);
             
             string Paragraph = "“Paranoids are not paranoid because they are " +
-              "paranoid but because they keep putting themselves deliberately into" +
+              "paranoid but because they keep putting themselves deliberately into"  +
               " paranoid avoidable situations";
             string[] letters = Paragraph.ToLower().Split(" ");
 
@@ -19,6 +19,7 @@
             }
             hash.frequencyOfWords("paranoid");
             Console.ReadLine();
+            hash.Remove("avoidable");
 
 
         }
